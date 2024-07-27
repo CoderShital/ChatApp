@@ -1,0 +1,18 @@
+body{
+    margin-left: 20px !important
+}
+
+.btn{
+    background-color: indianred !important;
+}
+
+.inp{
+    border-radius: 16px !important;
+    background-color: cadetblue !important;
+}
+/* #msg{
+    background-color: darkslateblue;
+} */
+#msg{
+    background-color: red !important;
+}
