@@ -9,7 +9,7 @@
     <h3>Edit chat here:</h3>
     <h5>Chat id is <%= chat.id %></h5>
     <p>This chat was sent from <b><%= chat.from %></b> to <b><%=chat.to%></b>.</p>
-    <form action="/chats/{{<%=chat._id %>}}?_method=PUT" method="post">                 <!--coz form madhe fkt 2 ch req send krta yetat - get n put so need to override it. hence npm i method-override-->
+    <form action="/chats/<%=chat._id %>?_method=PUT" method="post">                 <!--coz form madhe fkt 2 ch req send krta yetat - get n put so need to override it. hence npm i method-override-->
         <textarea name="msg" id="msg" rows="6" cols="45"><%= chat.msg %></textarea><br>
         <button>Edit</button>
     </form>
