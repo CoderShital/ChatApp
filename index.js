@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Chat = require("./models/chat.js");
 const Objs = require("./init.js");
+const methodOverride = require("method-override");
 
 
 let port = 3000;
@@ -12,6 +13,7 @@ app.set("views",path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static( path.join(__dirname, "public")));
 app.use(express.urlencoded({extended:true}));       //static files ko parse krne k liye
+app.use(methodOverride("_method"));
 
 main().then((res)=>{console.log("connection established!");}).catch((err)=>{console.log(err);});
 async function main(){
@@ -19,11 +21,17 @@ async function main(){
 }
 console.log();
 
-app.get("/chats:id/edit",async(req, res)=>{
-    let {id} = req.params;                  //all the ids
-    let ChatI = await Chat.findById(id);
-    res.render("./edit.ejs", {ChatI});
+app.put("/chats/:id", async(req, res)=>{
+    let {id} = req.params;
+    let {msg:newMsg} = req.body;
+    let updateChat = await Chat.findByIdAndUpdate( id, {msg:newMsg}, {runValidators:true, new:true});
+    res.redirect("/chats");
+});
 
+app.get("/chats/:id/edit", async(req, res)=>{
+    let {id} = req.params;
+    let chat = await Chat.findById(id);
+    res.render("edit.ejs", {chat});
 });
 
 app.post("/chats",(req, res)=>{
