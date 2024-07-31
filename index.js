@@ -21,6 +21,27 @@ async function main(){
 }
 console.log();
 
+app.delete("/chats/:id", async(req, res)=>{
+    let {id} = req.params;
+    let chat = await Chat.findByIdAndDelete(id);
+    console.log(chat, "Chat has been deleted directly!");
+    res.redirect("/chats");
+});
+
+app.post("/chats/:id", async(req, res)=>{
+    let {id} = req.params;
+    let delchat = await Chat.findByIdAndDelete(id);
+    console.log(delchat, "Chat has been deleted!");
+    res.redirect("/chats");
+});
+
+app.get("/chats/:id/delete", async(req, res)=>{
+    let {id} = req.params;
+    console.log(id);
+    let delchat = await Chat.findById(id);
+    res.render("delete.ejs", {delchat});
+});
+
 app.put("/chats/:id", async(req, res)=>{
     let {id} = req.params;
     console.log(id);

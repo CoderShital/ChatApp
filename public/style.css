@@ -22,3 +22,8 @@ body{
     border:1.4px solid black;
     padding: 4px;
 }
+
+.inp{
+    border-radius: 16px !important;
+    background-color: cadetblue !important;
+}
